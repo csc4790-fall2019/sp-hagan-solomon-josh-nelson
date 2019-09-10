@@ -12,43 +12,20 @@ authorization_file = authorization_folder / "bot_authorization.txt";
 
 # https://stackabuse.com/read-a-file-line-by-line-in-python/
 
-t_client_id = ''
-t_client_secret = ''
-t_username = ''
-t_password = ''
-t_user_agent = ''
+t_list = list()
 
 with open(authorization_file) as fa:
-    line = fa.readline().strip().rstrip()
-    cnt = 1
-    t_client_id = line
-    print(t_client_id)
-    while line:
-        if (cnt == 1):
-            line = fa.readline().strip().rstrip()
-            t_client_secret = line
-            print(t_client_secret)
-            cnt += 1
-        elif (cnt == 2):
-            line = fa.readline().strip().rstrip()
-            t_username = line
-            print(t_username)
-            cnt += 1
-        elif (cnt == 3):
-            line = fa.readline().strip().rstrip()
-            t_password = line
-            print(t_password)
-            cnt += 1
-        else:
-            line = fa.readline().strip().rstrip()
-            t_user_agent = line
-            print(t_user_agent)
+    line1 = fa.readline().strip()
+    line2 = fa.readline().strip()
+    line3 = fa.readline().strip()
+    line4 = fa.readline().strip()
+    line5 = fa.readline().strip()
 
-reddit = praw.Reddit(client_id=t_client_id,
-                     client_secret=t_client_secret,
-                     username=t_username,
-                     password=t_password,
-                     user_agent=t_user_agent);
+reddit = praw.Reddit(client_id=line1,
+                     client_secret=line2,
+                     username=line3,
+                     password=line4,
+                     user_agent=line5);
 
 subreddit = reddit.subreddit('CasualConversation');
 
@@ -62,7 +39,7 @@ post_info = {"title": [],
              "created": [],
              "body": []}
 
-for submission in reddit.subreddit('CasualConversation').top("all", limit=5):
+for submission in reddit.subreddit('CasualConversation').top("all", limit=10):
     post_info["title"].append(submission.title)
     post_info["score"].append(submission.score)
     post_info["id"].append(submission.id)
