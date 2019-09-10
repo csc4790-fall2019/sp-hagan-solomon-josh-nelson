@@ -2,6 +2,7 @@ import praw;
 import pandas as pd;
 import numpy as np;
 from pathlib import Path
+import time
 
 # https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f
 
@@ -39,7 +40,9 @@ post_info = {"title": [],
              "created": [],
              "body": []}
 
-for submission in reddit.subreddit('CasualConversation').top("all", limit=10):
+#https://stackoverflow.com/questions/1557571/how-do-i-get-time-of-a-python-programs-execution
+start_time = time.time()
+for submission in reddit.subreddit('CasualConversation').top("all", limit=1):
     post_info["title"].append(submission.title)
     post_info["score"].append(submission.score)
     post_info["id"].append(submission.id)
@@ -47,8 +50,6 @@ for submission in reddit.subreddit('CasualConversation').top("all", limit=10):
     post_info["comms_num"].append(submission.num_comments)
     post_info["created"].append(submission.created)
     post_info["body"].append(submission.selftext)
-    # f=file_to_open.open("a")
-    # f.write(str(post_info))
     with open(file_to_open, 'a', encoding='utf-8') as f:
         f.write(str(post_info))
     print(str(post_info))
@@ -61,5 +62,5 @@ for submission in reddit.subreddit('CasualConversation').top("all", limit=10):
 
 # https://stackoverflow.com/questions/50268298/append-string-to-each-line-of-txt-file-in-python
 
-
+print("--- %s seconds ---" % (time.time() - start_time))
 print("c'est fini")
