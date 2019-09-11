@@ -1,29 +1,49 @@
 import os
 import nltk
+import pandas as pd
+import time
 from pathlib import Path
+import re
 
 data_folder = Path("D:\Senior Project Holder all\Reddit Proj\Text Data\Testing Purposes");
 raw_data = data_folder / "casual_conversation_top_all.txt";
 tokenize_data = data_folder / "casual_conversation_top_all_tokens.txt"
-
+frequency_output = data_folder / "casual_conversation_top_all_title_freq.txt"
 with open(raw_data, 'r', encoding='utf-8') as sf:
     data = sf.read()
 
-print(type(data))
+# https://stackoverflow.com/questions/23142251/is-there-a-way-to-remove-all-characters-except-letters-in-a-string-in-python
+alpha_only_data = re.sub(r'([^\s\w]|_)+', '', data)
 
-data_tokens = nltk.word_tokenize(data)
+# Starting timer
+start_time = time.time()
 
+data_tokens = nltk.word_tokenize(alpha_only_data)
 
+print(alpha_only_data)
 
 with open(tokenize_data, 'w') as wf:
-    tokenize_data.write_text(data)
+    tokenize_data.write_text(alpha_only_data)
 
+from nltk.probability import FreqDist
+
+fdist = FreqDist()
+
+for word in data_tokens:
+    fdist[word.lower()] += 1
+
+print(fdist)
+
+'''for keys,values in fdist:
+    print(keys + ":" + values)'''
+
+for word in fdist:
+    print(word)
 
 '''
-if you comment out everything from line 9 to 20 and replace it with this you should print out 
-a tokenized tester_string
+with open(frequency_output, 'a', encoding='utf-8') as f:
+    holderString = fdist.pprint(
+    f.write(cop)'''
 
-tester_string = "hello everyone how are you"
-ret_string = nltk.word_tokenize(tester_string)
-print(ret_string)
-'''
+print("--- %s seconds ---" % (time.time() - start_time))
+print("c'est fini")
