@@ -34,16 +34,25 @@ for word in data_tokens:
 
 print(fdist)
 
+
 '''for keys,values in fdist:
     print(keys + ":" + values)'''
 
 for word in fdist:
     print(word)
 
+
+fdist.pprint()
+
+with open(frequency_output, 'a', encoding='utf-8') as f:
+    holderString = dict(fdist)
+    frequency_output.write_text(str(holderString))
+
 '''
 with open(frequency_output, 'a', encoding='utf-8') as f:
-    holderString = fdist.pprint(
-    f.write(cop)'''
+    holderString = fdist.pprint()
+    f.write(cop)
+'''
 
 print("--- %s seconds ---" % (time.time() - start_time))
 print("c'est fini")
