@@ -1,3 +1,5 @@
+import re
+
 import praw;
 import pandas as pd;
 import numpy as np;
@@ -42,16 +44,18 @@ post_info = {"title": [],
 
 #https://stackoverflow.com/questions/1557571/how-do-i-get-time-of-a-python-programs-execution
 start_time = time.time()
-for submission in reddit.subreddit('CasualConversation').top("all", limit=1):
+for submission in reddit.subreddit('CasualConversation').top("year", limit=10):
     post_info["title"].append(submission.title)
-    post_info["score"].append(submission.score)
-    post_info["id"].append(submission.id)
-    post_info["url"].append(submission.url)
-    post_info["comms_num"].append(submission.num_comments)
-    post_info["created"].append(submission.created)
-    post_info["body"].append(submission.selftext)
+    #post_info["score"].append(submission.score)
+    #post_info["id"].append(submission.id)
+    #post_info["url"].append(submission.url)
+    #post_info["comms_num"].append(submission.num_comments)
+    #post_info["created"].append(submission.created)
+    #post_info["body"].append(submission.selftext)
     with open(file_to_open, 'a', encoding='utf-8') as f:
-        f.write(str(post_info))
+        temp = str(post_info)
+        strippedHolder = re.sub(r'([^\s\w]|_)+', '', temp)
+        f.write(str(temp))
     print(str(post_info))
     post_info = {"title": [],
                  "score": [],
