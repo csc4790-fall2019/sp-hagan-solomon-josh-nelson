@@ -1,5 +1,5 @@
 import re
-
+import json
 import praw;
 import pandas as pd;
 import numpy as np;
@@ -7,6 +7,9 @@ from pathlib import Path
 import time
 
 # https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f
+
+with open('auth.json', 'r') as file:
+	auth = json.load(file)
 
 data_folder = Path("D:\Senior Project Holder all\Reddit Proj\Text Data\Testing Purposes");
 file_to_open = data_folder / "casual_conversation_top_all.txt";
@@ -17,23 +20,15 @@ authorization_file = authorization_folder / "bot_authorization.txt";
 
 t_list = list()
 
-with open(authorization_file) as fa:
-    line1 = fa.readline().strip()
-    line2 = fa.readline().strip()
-    line3 = fa.readline().strip()
-    line4 = fa.readline().strip()
-    line5 = fa.readline().strip()
+reddit = praw.Reddit(client_id=auth['client_id'],
+                     client_secret=auth['client_secret'],
+                     username=auth['username'],
+                     password=auth['password'],
+                     user_agent='This is a test.')
 
-reddit = praw.Reddit(client_id=line1,
-                     client_secret=line2,
-                     username=line3,
-                     password=line4,
-                     user_agent=line5);
-
-subreddit = reddit.subreddit('CasualConversation');
+subreddit = reddit.subreddit('CasualConversation')
 
 # http://www.storybench.org/how-to-scrape-reddit-with-python/
-
 
 post_info = {"title": [],
              "score": [],
