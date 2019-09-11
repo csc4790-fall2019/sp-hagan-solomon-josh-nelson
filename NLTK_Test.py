@@ -13,6 +13,7 @@ with open(raw_data, 'r', encoding='utf-8') as sf:
     data = sf.read()
 
 # https://stackoverflow.com/questions/23142251/is-there-a-way-to-remove-all-characters-except-letters-in-a-string-in-python
+line = re.sub('[!@#$,{}]', '', data)
 alpha_only_data = re.sub(r'([^\s\w]|_)+', '', data)
 
 # Starting timer
@@ -22,8 +23,11 @@ data_tokens = nltk.word_tokenize(alpha_only_data)
 
 print(alpha_only_data)
 
-with open(tokenize_data, 'w') as wf:
-    tokenize_data.write_text(alpha_only_data)
+with open(tokenize_data, 'w', encoding='utf-8') as wf:
+    try:
+        tokenize_data.write_text(alpha_only_data)
+    except:
+        print("encoding charmap error")
 
 from nltk.probability import FreqDist
 
@@ -56,3 +60,8 @@ with open(frequency_output, 'a', encoding='utf-8') as f:
 
 print("--- %s seconds ---" % (time.time() - start_time))
 print("c'est fini")
+
+
+def titleStripper(str):
+
+    return
