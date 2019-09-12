@@ -3,7 +3,6 @@ import nltk
 import json
 import pandas as pd
 import time
-from main import reddit as reddit
 from pathlib import Path
 import re
 
