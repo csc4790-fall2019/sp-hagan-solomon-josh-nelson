@@ -1,11 +1,19 @@
 import os
 import nltk
+import json
 import pandas as pd
 import time
 from pathlib import Path
 import re
 
-data_folder = Path("D:\Senior Project Holder all\Reddit Proj\Text Data\Testing Purposes");
+testing_folder = Path('testing')
+
+with open(testing_folder / 'testing.json', 'r') as file:
+    testing = json.load(file)
+
+sentence =
+
+data_folder = Path("D: = \Senior Project Holder all\Reddit Proj\Text Data\Testing Purposes");
 raw_data = data_folder / "casual_conversation_top_all.txt";
 tokenize_data = data_folder / "casual_conversation_top_all_tokens.txt"
 frequency_output = data_folder / "casual_conversation_top_all_title_freq.txt"
@@ -61,7 +69,3 @@ with open(frequency_output, 'a', encoding='utf-8') as f:
 print("--- %s seconds ---" % (time.time() - start_time))
 print("c'est fini")
 
-
-def titleStripper(str):
-
-    return
