@@ -8,13 +8,18 @@ from pathlib import Path
 import re
 
 testing_folder = Path('testing')
-
+frequency_folder = Path('frequencies')
 with open(testing_folder / 'testing.json', 'r') as file:
-    testing = json.load(file)
+    test = json.load(file)
 
-sentence =
 
-data_folder = Path("D: = \Senior Project Holder all\Reddit Proj\Text Data\Testing Purposes");
+frequency_folder = Path('frequencies')
+if not Path(frequency_folder).exists():
+    Path(frequency_folder).mkdir()
+
+sentence = test['title']
+
+data_folder = Path("D: =  auth['client_id']\Senior Project Holder all\Reddit Proj\Text Data\Testing Purposes");
 raw_data = data_folder / "casual_conversation_top_all.txt";
 tokenize_data = data_folder / "casual_conversation_top_all_tokens.txt"
 frequency_output = data_folder / "casual_conversation_top_all_title_freq.txt"
@@ -57,15 +62,6 @@ for word in fdist:
 
 fdist.pprint()
 
-with open(frequency_output, 'a', encoding='utf-8') as f:
-    holderString = dict(fdist)
-    frequency_output.write_text(str(holderString))
-
-'''
-with open(frequency_output, 'a', encoding='utf-8') as f:
-    holderString = fdist.pprint()
-    f.write(cop)
-'''
 
 print("--- %s seconds ---" % (time.time() - start_time))
 print("c'est fini")
