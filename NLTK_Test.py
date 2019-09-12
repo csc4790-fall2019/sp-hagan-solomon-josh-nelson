@@ -3,6 +3,9 @@ import nltk
 import json
 import pandas as pd
 import time
+
+from pip._internal.utils import encoding
+
 from main import reddit as reddit
 from pathlib import Path
 import re
@@ -61,6 +64,9 @@ for word in fdist:
 
 
 fdist.pprint()
+
+with open(frequency_folder / 'frequencies.json'), 'w', encoding='utf-8') as file:
+    json.dump(post_info, file)
 
 
 print("--- %s seconds ---" % (time.time() - start_time))
