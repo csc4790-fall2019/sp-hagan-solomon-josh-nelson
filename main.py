@@ -11,8 +11,6 @@ import time
 with open('auth.json', 'r') as file:
     auth = json.load(file)
 
-data_folder = Path('subreddits')
-
 reddit = praw.Reddit(client_id=auth['client_id'],
                      client_secret=auth['client_secret'],
                      username=auth['username'],
@@ -24,10 +22,11 @@ subreddit = reddit.subreddit('CasualConversation')
 # http://www.storybench.org/how-to-scrape-reddit-with-python/
 
 #https://stackoverflow.com/questions/1557571/how-do-i-get-time-of-a-python-programs-execution
+data_folder = Path('subreddits')
 subreddit = 'CasualConversation'
-data_folder = data_folder / subreddit
-if not Path(data_folder).exists():
-    Path(data_folder).mkdir()
+subreddit_path = data_folder / subreddit
+if not Path(subreddit_path).exists():
+    Path(subreddit_path).mkdir()
 
 start_time = time.time()
 counter = 0
@@ -40,7 +39,7 @@ for submission in reddit.subreddit(subreddit).top('year', limit=100):
     #post_info["comms_num"].append(submission.num_comments)
     #post_info["created"].append(submission.created)
     #post_info["body"].append(submission.selftext)
-    with open(data_folder / (str(counter) + '.json'), 'w', encoding='utf-8') as file:
+    with open(subreddit_path / (str(counter) + '.json'), 'w', encoding='utf-8') as file:
         json.dump(post_info, file)
     counter += 1
 # https://stackoverflow.com/questions/50268298/append-string-to-each-line-of-txt-file-in-python
