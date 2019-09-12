@@ -3,13 +3,11 @@ import nltk
 import json
 import pandas as pd
 import time
-<<<<<<< HEAD
 
 from pip._internal.utils import encoding
 
 from main import reddit as reddit
-=======
->>>>>>> d4f2eebc9319fa2e42c16e953a0f3354fdda946a
+
 from pathlib import Path
 import re
 
