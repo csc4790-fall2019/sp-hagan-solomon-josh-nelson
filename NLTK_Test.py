@@ -21,7 +21,7 @@ if not Path(frequency_folder).exists():
 
 sentence = test['title']
 
-data_folder = Path("D: =  auth['client_id']\Senior Project Holder all\Reddit Proj\Text Data\Testing Purposes");
+data_folder = Path("D: =  auth['client_id']/Senior Project Holder all/Reddit Proj/Text Data/Testing Purposes");
 raw_data = data_folder / "casual_conversation_top_all.txt";
 tokenize_data = data_folder / "casual_conversation_top_all_tokens.txt"
 frequency_output = data_folder / "casual_conversation_top_all_title_freq.txt"

@@ -17,4 +17,4 @@ reddit = praw.Reddit(client_id=auth['client_id'],
                      password=auth['password'],
                      user_agent='This is a test.')
 
-scrape(reddit)
+scrape('AskHistorians', reddit)

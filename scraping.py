@@ -5,23 +5,20 @@ from pathlib import Path
 import time
 
 # https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f
-def scrape(reddit):
-    print('test')
-
-    subreddit = reddit.subreddit('CasualConversation')
+def scrape(subreddit_name, reddit):
+    subreddit = reddit.subreddit(subreddit_name)
 
     # http://www.storybench.org/how-to-scrape-reddit-with-python/
 
     #https://stackoverflow.com/questions/1557571/how-do-i-get-time-of-a-python-programs-execution
     data_folder = Path('subreddits')
-    subreddit = 'CasualConversation'
-    subreddit_path = data_folder / subreddit
+    subreddit_path = data_folder / subreddit.display_name
     if not Path(subreddit_path).exists():
         Path(subreddit_path).mkdir()
 
     start_time = time.time()
     counter = 0
-    for submission in reddit.subreddit(subreddit).top('year', limit=100):
+    for submission in reddit.subreddit(subreddit.display_name).top('year', limit=100):
         post_info = {}
         post_info['title'] = submission.title
         post_info["score"] = submission.score
