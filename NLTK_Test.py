@@ -3,13 +3,9 @@ import nltk
 import json
 import pandas as pd
 import time
-<<<<<<< HEAD
-
 from pip._internal.utils import encoding
-
 from main import reddit as reddit
-=======
->>>>>>> d4f2eebc9319fa2e42c16e953a0f3354fdda946a
+
 from pathlib import Path
 import re
 
@@ -29,6 +25,7 @@ data_folder = Path("D: =  auth['client_id']\Senior Project Holder all\Reddit Pro
 raw_data = data_folder / "casual_conversation_top_all.txt";
 tokenize_data = data_folder / "casual_conversation_top_all_tokens.txt"
 frequency_output = data_folder / "casual_conversation_top_all_title_freq.txt"
+
 with open(raw_data, 'r', encoding='utf-8') as sf:
     data = sf.read()
 
@@ -69,7 +66,7 @@ for word in fdist:
 fdist.pprint()
 
 with open((frequency_folder / 'frequencies.json'), 'w', encoding='utf-8') as file:
-    json.dump(post_info, file)
+    json.dump(frequency_folder, file)
 
 
 print("--- %s seconds ---" % (time.time() - start_time))
