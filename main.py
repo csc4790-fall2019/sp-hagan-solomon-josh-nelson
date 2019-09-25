@@ -7,6 +7,7 @@ from pathlib import Path
 import time
 
 from scraping import scrape
+from sprint1_scraper import scrape1
 
 with open('auth.json', 'r') as file:
     auth = json.load(file)
@@ -17,4 +18,5 @@ reddit = praw.Reddit(client_id=auth['client_id'],
                      password=auth['password'],
                      user_agent='This is a test.')
 
-scrape('AskHistorians', reddit)
+#scrape('AskHistorians', reddit)
+scrape1('AskHistorians', reddit)
