@@ -3,6 +3,11 @@ import math
 import numpy as np
 import pandas as pd
 
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from matplotlib.colors import ListedColormap, LinearSegmentedColormap
+
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.naive_bayes import GaussianNB
@@ -102,8 +107,32 @@ def run_naive_bayes(subreddit_name, reddit):
     print('Total correct good: {0} / {1}'.format(total_good_right, total_good) +
         ' ({0})'.format(total_good_right / total_good))
 
+    mat_plot_test_accuracy(total_good_right, "good", total_good)
+
     print('Total correct bad: {0} / {1}'.format(total_bad_right, total_bad) +
         ' ({0})'.format(total_bad_right / total_bad))
 
+    mat_plot_test_accuracy(total_bad_right, "bad", total_bad)
+
+    #mat_plot_test_accuracy(total_bad_right, "bad", total_bad)
+
     # print('Total correct very bad: {0} / {1}'.format(total_very_bad_right, total_very_bad) +
     #     ' ({0})'.format(total_very_bad_right / total_very_bad))
+
+
+def mat_plot_test_accuracy(correct, valType, total):
+    if valType == 'good':
+        labels = 'good-right', 'good-missed'
+        sizes = [correct, total-correct]
+        explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+    elif valType == 'bad':
+        labels = 'bad-right', 'bad-missed'
+        sizes = [correct, total-correct]
+        explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+            shadow=True, startangle=90)
+    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+    plt.show()
