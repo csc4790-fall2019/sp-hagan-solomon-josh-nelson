@@ -78,4 +78,3 @@ def scrape_hot(subreddit_name, reddit):
         with open(subreddit_path / (str(counter) + '.json'), 'w', encoding='utf-8') as file:
             json.dump(post_info, file)
         counter += 1
-        
