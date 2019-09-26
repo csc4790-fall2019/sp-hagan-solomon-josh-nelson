@@ -6,7 +6,6 @@ import numpy as np;
 from pathlib import Path
 import time
 
-from scraping import scrape
 from sprint1_scraper import scrape1
 from naive_bayes_test import run_naive_bayes
 
@@ -20,5 +19,5 @@ reddit = praw.Reddit(client_id=auth['client_id'],
                      user_agent='This is a test.')
 
 #scrape('AskHistorians', reddit)
-scrape1('AskReddit', reddit)
+#scrape1('AskReddit', reddit)
 run_naive_bayes('AskReddit', reddit)

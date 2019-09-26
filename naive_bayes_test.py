@@ -128,6 +128,8 @@ def mat_plot_test_accuracy(good_good, val_type1, gtotal, bad_good, val_type2, ba
     ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
             shadow=True, startangle=90)
     ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.savefig('plot1.png')
+
 
     fig2, ax2 = plt.subplots()
     labels = 'bad-right', 'bad-missed'
@@ -138,4 +140,4 @@ def mat_plot_test_accuracy(good_good, val_type1, gtotal, bad_good, val_type2, ba
             shadow=True, startangle=90)
     ax2.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
-    plt.show()
+    plt.savefig('plot2.png')
