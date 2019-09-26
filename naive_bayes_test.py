@@ -107,12 +107,12 @@ def run_naive_bayes(subreddit_name, reddit):
     print('Total correct good: {0} / {1}'.format(total_good_right, total_good) +
         ' ({0})'.format(total_good_right / total_good))
 
-    mat_plot_test_accuracy(total_good_right, "good", total_good)
 
     print('Total correct bad: {0} / {1}'.format(total_bad_right, total_bad) +
         ' ({0})'.format(total_bad_right / total_bad))
 
-    mat_plot_test_accuracy(total_bad_right, "bad", total_bad)
+
+    mat_plot_test_accuracy(total_good_right, 'good', total_good, total_bad_right, 'bad', total_bad)
 
     #mat_plot_test_accuracy(total_bad_right, "bad", total_bad)
 
@@ -120,19 +120,23 @@ def run_naive_bayes(subreddit_name, reddit):
     #     ' ({0})'.format(total_very_bad_right / total_very_bad))
 
 
-def mat_plot_test_accuracy(correct, valType, total):
-    if valType == 'good':
-        labels = 'good-right', 'good-missed'
-        sizes = [correct, total-correct]
-        explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
-    elif valType == 'bad':
-        labels = 'bad-right', 'bad-missed'
-        sizes = [correct, total-correct]
-        explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
-
+def mat_plot_test_accuracy(good_good, val_type1, gtotal, bad_good, val_type2, bad_total):
     fig1, ax1 = plt.subplots()
+    labels = 'good-right', 'good-missed'
+    sizes = [good_good, gtotal-good_good]
+    explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
     ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
             shadow=True, startangle=90)
     ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
+    fig2, ax2 = plt.subplots()
+    labels = 'bad-right', 'bad-missed'
+    sizes = [bad_good, bad_total-bad_good]
+    explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+
+    ax2.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+            shadow=True, startangle=90)
+    ax2.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
     plt.show()
+    
