@@ -8,6 +8,7 @@ import time
 
 from scraping import scrape
 from sprint1_scraper import scrape1
+from naive_bayes_test import run_naive_bayes
 
 with open('auth.json', 'r') as file:
     auth = json.load(file)
@@ -19,4 +20,5 @@ reddit = praw.Reddit(client_id=auth['client_id'],
                      user_agent='This is a test.')
 
 #scrape('AskHistorians', reddit)
-scrape1('AskHistorians', reddit)
+scrape1('AskReddit', reddit)
+run_naive_bayes('AskReddit', reddit)
