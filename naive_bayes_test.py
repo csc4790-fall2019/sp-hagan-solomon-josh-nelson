@@ -139,4 +139,3 @@ def mat_plot_test_accuracy(good_good, val_type1, gtotal, bad_good, val_type2, ba
     ax2.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
     plt.show()
-    

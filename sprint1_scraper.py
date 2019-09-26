@@ -41,10 +41,9 @@ def scrape_controversial(subreddit_name, reddit):
     if not Path(subreddit_path).exists():
         Path(subreddit_path).mkdir(parents=True)
     counter = 0
-    for submission in reddit.subreddit(subreddit.display_name).controversial('year', limit=POSTS_TO_SCRAPE):
+    for submission in reddit.subreddit(subreddit.display_name).controversial('all', limit=POSTS_TO_SCRAPE):
         post_info = {}
         post_info['title'] = submission.title
-        print('running')
         post_info['score'] = submission.score - 100
         post_info['id'] = submission.id
         with open(subreddit_path / (str(counter) + '.json'), 'w', encoding='utf-8') as file:
