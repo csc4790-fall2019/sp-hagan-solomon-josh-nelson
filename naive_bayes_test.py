@@ -16,7 +16,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
 from pathlib import Path
 
-def run_naive_bayes(subreddit_name, reddit):
+def get_data(subreddit_name):
     p = Path('subreddits/{0}'.format(subreddit_name))
     directories = [x for x in p.iterdir() if x.is_dir()]
 
@@ -47,8 +47,20 @@ def run_naive_bayes(subreddit_name, reddit):
 
     Reddit_Data = {'Title': text_data,'Score': labels, 'Weight': weights}
     df = pd.DataFrame(Reddit_Data, columns=['Title', 'Score', 'Weight'])
+
+    # Download the data
+    # df.to_excel('persistent_data.xlsx')
+
+    # Use file with consistent data (requires openpyxl module)
+    # import openpyxl
+    # import xlrd
+    # df = pd.read_excel('persistent_data.xlsx')
+
     df = df.reindex(np.random.permutation(df.index))
 
+    return df
+
+def run_naive_bayes(subreddit_name, df):
     SPLIT_RATIO = 0.6
     split_point = math.floor(len(df.index) * SPLIT_RATIO)
 
@@ -56,8 +68,9 @@ def run_naive_bayes(subreddit_name, reddit):
     train_labels = df['Score'][0:split_point]
     train_weights = df['Weight'][0:split_point]
 
-    test_data = df['Title'][split_point:len(text_data)]
-    test_labels = df['Score'][split_point:len(labels)]
+    test_data = df['Title'][split_point:df.shape[0]]
+    test_labels = df['Score'][split_point:df.shape[0]]
+
 
     count_vect = CountVectorizer()
     X_train_counts = count_vect.fit_transform(train_data)
@@ -111,6 +124,7 @@ def run_naive_bayes(subreddit_name, reddit):
     print('Total correct bad: {0} / {1}'.format(total_bad_right, total_bad) +
         ' ({0})'.format(total_bad_right / total_bad))
 
+    print('---------------------------------------')
 
     mat_plot_test_accuracy(total_good_right, 'good', total_good, total_bad_right, 'bad', total_bad)
 
