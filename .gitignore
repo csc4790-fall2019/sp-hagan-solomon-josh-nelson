@@ -3,4 +3,3 @@ subreddits/*
 auth.json
 env/
 guilding_posts.py
-sentence_analysis.py
