@@ -5,7 +5,7 @@ import os, errno
 
 POSTS_TO_SCRAPE = 1000
 
-def scrape1(subreddit_name, reddit):
+def scrape(subreddit_name, reddit):
     start_time = time.time()
     scrape_new(subreddit_name, reddit)
     scrape_controversial(subreddit_name, reddit)
