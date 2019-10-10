@@ -20,6 +20,6 @@ reddit = praw.Reddit(client_id=auth['client_id'],
                      user_agent='This is a test.')
 
 #scrape('AskHistorians', reddit)
-scrape('CasualConversation', reddit)
-data = get_data('CasualConversation')
-run_naive_bayes('CasualConversation', data)
+#scrape('AskReddit', reddit)
+data = get_data('AskReddit')
+run_naive_bayes('AskReddit', data)

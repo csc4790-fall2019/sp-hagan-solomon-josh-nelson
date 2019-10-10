@@ -28,6 +28,7 @@ def scrape_new(subreddit_name, reddit):
         post_info['title'] = submission.title
         post_info["score"] = submission.score
         post_info['id'] = submission.id
+        post_info['gildings'] = submission.gildings
         with open(subreddit_path / (str(counter) + '.json'), 'w', encoding='utf-8') as file:
             json.dump(post_info, file)
         counter += 1
@@ -46,6 +47,7 @@ def scrape_controversial(subreddit_name, reddit):
         post_info['title'] = submission.title
         post_info['score'] = submission.score - 100
         post_info['id'] = submission.id
+        post_info['gildings'] = submission.gildings
         with open(subreddit_path / (str(counter) + '.json'), 'w', encoding='utf-8') as file:
             json.dump(post_info, file)
         counter += 1
@@ -64,6 +66,7 @@ def scrape_top(subreddit_name, reddit):
         post_info['title'] = submission.title
         post_info["score"] = submission.score
         post_info['id'] = submission.id
+        post_info['gildings'] = submission.gildings
         with open(subreddit_path / (str(counter) + '.json'), 'w', encoding='utf-8') as file:
             json.dump(post_info, file)
         counter += 1
@@ -85,6 +88,7 @@ def scrape_hot(subreddit_name, reddit):
         else:
             post_info['score'] = submission.score
         post_info['id'] = submission.id
+        post_info['gildings'] = submission.gildings
         with open(subreddit_path / (str(counter) + '.json'), 'w', encoding='utf-8') as file:
             json.dump(post_info, file)
         counter += 1

@@ -24,26 +24,35 @@ def get_data(subreddit_name):
     labels = []
     weights = []
 
+    counter = 0
     for directory in directories:
         for file in directory.iterdir():
             with open(file) as f:
                 data = json.load(f)
                 text_data.append(data['title'])
+                
                 if data['score'] >= 500:
                     labels.append('good')
                 else:
                     labels.append('bad')
 
-                if data['score'] > 10000:
-                    weights.append(50)
+                if data['score'] > 5000:
+                    weights.append(40)
                 elif data['score'] > 1000:
-                    weights.append(30)
+                    weights.append(20)
                 elif data['score'] < 50:
-                    weights.append(15)
+                    weights.append(5)
                 elif data['score'] < -100:
-                    weights.append(30)
+                    weights.append(20)
                 else:
                     weights.append(1)
+
+                if 'gid_2' in data['gildings']:
+                    weights[counter] *= 1.50
+                if 'gid_3' in data['gildings']:
+                    weights[counter] *= 3
+
+                counter += 1
 
     Reddit_Data = {'Title': text_data,'Score': labels, 'Weight': weights}
     df = pd.DataFrame(Reddit_Data, columns=['Title', 'Score', 'Weight'])
