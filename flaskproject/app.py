@@ -1,4 +1,5 @@
-from flask import Flask, url_for, render_template
+from flask import Flask, url_for, render_template, request
+from werkzeug.utils import redirect
 
 app = Flask(__name__)
 
@@ -11,6 +12,16 @@ def index(name):
 def welcome_page():
     url_for('static', filename='style1.css')
     return render_template('template1.html', name='/login/welcomepage')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] !='admin' or request.form['passwowrd'] != 'admin':
+            error = 'Invalid Credentials. Please Try Again'
+        else:
+            return redirect(url_for('login/welcompage'))
+    return render_template('login_template.html', error=error)
 
 
 if __name__ == '__main__':
