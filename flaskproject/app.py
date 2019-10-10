@@ -1,5 +1,8 @@
 from flask import Flask, url_for, render_template, request
 from werkzeug.utils import redirect
+from flaskproject.flask_scripts import login_scripts
+
+
 
 app = Flask(__name__)
 
@@ -26,7 +29,12 @@ def login():
 @app.route('register', methods=['POST'])
 def register():
     error = None
-    #if request.method == 'POST':
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            login_scripts(request.form['username'], request.form['password'])
+        else:
+            return redirect(url_for('login/welcome_page'))
+    return render_template('register_template.html', error=error)
 
 
 
