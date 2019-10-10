@@ -13,6 +13,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.naive_bayes import GaussianNB
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import SGDClassifier
 from sklearn.pipeline import Pipeline
 from pathlib import Path
 

@@ -3,3 +3,4 @@ subreddits/*
 auth.json
 env/
 guilding_posts.py
+public_not_for_actual_use/
