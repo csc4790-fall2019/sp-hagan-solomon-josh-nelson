@@ -69,8 +69,7 @@ def split_train_test(subreddit, split_percent=0.7, seed=0):
     random.shuffle(examples)
     train_set = examples[:train_set_size]
     test_set = examples[train_set_size:]
-
-    print(naiveBayesTestBag(train_set, test_set, vocabulary, examples, class_labels))
+    
     return (train_set, test_set)
 
     # print(naiveBayesTest(train_set, test_set))
