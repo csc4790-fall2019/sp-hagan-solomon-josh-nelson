@@ -23,6 +23,12 @@ def login():
             return redirect(url_for('login/welcompage'))
     return render_template('login_template.html', error=error)
 
+@app.route('register', methods=['POST'])
+def register():
+    error = None
+    #if request.method == 'POST':
+
+
 
 if __name__ == '__main__':
     app.run()
