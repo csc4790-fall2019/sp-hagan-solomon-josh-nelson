@@ -15,7 +15,7 @@ def index(name):
     return '<h1>hello {}!<h1>'.format(name)
 
 
-@app.route('/login/welcomepage')
+@app.route('/login/welcome_page')
 def welcome_page():
     url_for('static', filename='style1.css')
     return render_template('template1.html', name='/login/welcomepage')
@@ -32,16 +32,14 @@ def login():
     return render_template('login_template.html', error=error)
 
 
-@app.route('/register/reg', methods=['POST'])
+@app.route('/register/reg', methods=['Get', 'POST'])
 def register():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            create_login(request.form['username'], request.form['password'])
-            error = 'Invalid Credentials. Please Try Again'
-        else:
-            return redirect(url_for('login/welcome_page'))
+        create_login(request.form['username'], request.form['password'])
+        return redirect(url_for('login/welcome_page'))
     return render_template('register_template.html', error=error)
+
 
 def create_login(username, password):
     cred_folder = Path('credentials')
@@ -49,11 +47,12 @@ def create_login(username, password):
     if not Path(cred_path).exists():
         Path(cred_path).mkdir(parents=True)
         cred = {}
-        cred['title'] = hash(username)
-        cred["score"] = hash(password)
+        cred['username'] = request.form[username]
+        cred['password'] = request.form[password]
 
-        with open(cred_path / (hash(username) + '.json'), 'w', encoding='utf-8') as file:
-            json.dump(cred, file)
+    with open(cred_path / (hash(username) + '.json'), 'w', encoding='utf-8') as file:
+        json.dump(cred, file)
+
 
 if __name__ == '__main__':
     app.run()
