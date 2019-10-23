@@ -32,3 +32,4 @@ naiveBayesTest(train_data, test_data)
 train_data, test_data = split_train_test('AskReddit', split_percent=1)
 probs = buildProbabilityTable(train_data)
 print(naiveBayesClassify(probs, input("Enter a phrase: ")))
+
