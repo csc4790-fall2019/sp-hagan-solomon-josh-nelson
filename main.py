@@ -23,8 +23,8 @@ def main(title_runs, total_percent_runs):
 	print('Prediction for "{0}": {1}'.format(test_title, prediction))
 
 	success_pct, failure_pct, avg_pct = clfs.get_total_percentages(data, total_percent_runs)
-	print('Success Posts %: {0}'.format(success_pct))
-	print('Failure Posts %: {0}'.format(failure_pct))
-	print('Average Posts %: {0}'.format(avg_pct))
+	print('Viral Post Correctness: {0}'.format(success_pct))
+	print('Not Viral Post Correctness: {0}'.format(failure_pct))
+	print('Average Correctness: {0}'.format(avg_pct))
 
 main(20, 20)
