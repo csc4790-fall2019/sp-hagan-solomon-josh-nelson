@@ -48,10 +48,10 @@ def get_data(subreddit_name):
                 else:
                     weights.append(1)
 
-                if 'gid_2' in data['gildings']:
-                    weights[counter] *= 1.50
-                if 'gid_3' in data['gildings']:
-                    weights[counter] *= 3
+                # if 'gid_2' in data['gildings']:
+                #     weights[counter] *= 1.50
+                # if 'gid_3' in data['gildings']:
+                #     weights[counter] *= 3
 
                 counter += 1
 

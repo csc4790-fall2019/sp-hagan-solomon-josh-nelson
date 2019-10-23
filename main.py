@@ -1,35 +1,30 @@
-import re
+import praw
 import json
-import praw;
-import pandas as pd;
-import numpy as np;
-from pathlib import Path
-import time
-
+import utils
+import clfs
 from scraper import scrape
-from naive_bayes import get_data
-from naive_bayes import run_naive_bayes
-from example_classifier import split_train_test
-from example_classifier import buildProbabilityTable
-from example_classifier import naiveBayesClassify
-from example_classifier import naiveBayesTest
+from sklearn.model_selection import train_test_split
 
-with open('auth.json', 'r') as file:
-    auth = json.load(file)
+def main(runs):
+	with open('auth.json', 'r') as file:
+	    auth = json.load(file)
 
-reddit = praw.Reddit(client_id=auth['client_id'],
-                     client_secret=auth['client_secret'],
-                     username=auth['username'],
-                     password=auth['password'],
-                     user_agent='This is a test.')
+	reddit = praw.Reddit(client_id=auth['client_id'],
+	                     client_secret=auth['client_secret'],
+	                     username=auth['username'],
+	                     password=auth['password'],
+	                     user_agent='This is a test.')
 
-#scrape('AskHistorians', reddit)
-#scrape('AskReddit', reddit)
-# data = get_data('CasualConversation')
-train_data, test_data = split_train_test('AskReddit', seed=3)
-naiveBayesTest(train_data, test_data)
+	#scrape('AskReddit', reddit)
+	data = utils.get_data('AskReddit')
 
-train_data, test_data = split_train_test('AskReddit', split_percent=1)
-probs = buildProbabilityTable(train_data)
-print(naiveBayesClassify(probs, input("Enter a phrase: ")))
+	test_title = input('Enter a title: ')
+	prediction = clfs.predict_title(data, test_title, 10)
+	print('Prediction for "{0}": {1}'.format(test_title, prediction))
 
+	success_pct, failure_pct, avg_pct = clfs.get_total_percentages(data, runs)
+	print('Success Posts %: {0}'.format(success_pct))
+	print('Failure Posts %: {0}'.format(failure_pct))
+	print('Average Posts %: {0}'.format(avg_pct))
+
+main(20)
