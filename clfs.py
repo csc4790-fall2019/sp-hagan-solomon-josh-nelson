@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import SGDClassifier
 from sklearn.linear_model import LogisticRegression
@@ -96,7 +97,7 @@ def get_total_percentages(data, runs):
     return ((success_pct / runs), (failure_pct / runs), (avg_pct / runs))
 
 def predict_title(data, title, runs):
-    # nb = naive_bayes()
+    nb = naive_bayes()
     svm = sgd()
     lgrg = logreg()
 
@@ -104,22 +105,24 @@ def predict_title(data, title, runs):
     for x in range(runs):
         X_train, X_test, y_train, y_test = train_test_split(data['Title'], data['Rating'], test_size=0.3)
 
-        # nb.fit(X_train, y_train)
-        # nb_predicted = nb.predict([title])
+        nb.fit(X_train, y_train)
+        nb_predicted = nb.predict([title])
         # print(nb_predicted)
         # nb_success_pct, nb_failure_pct, nb_avg_pct = determine_percentages(predicted, y_test)
 
         svm.fit(X_train, y_train)
         svm_predicted = svm.predict([title])
+        # print(svm_predicted)
         # svm_success_pct, svm_failure_pct, svm_avg_pct = determine_percentages(predicted, y_test)
 
         lgrg.fit(X_train, y_train)
         lgrg_predicted = lgrg.predict([title])
+        # print(lgrg_predicted)
         # lgrg_success_pct, lgrg_failure_pct, lgrg_avg_pct = determine_percentages(predicted, y_test)
         
         found_goods = 0
-        # if nb_predicted[0] == 'good':
-        #     found_goods += 1
+        if nb_predicted[0] == 'good':
+            found_goods += 1
         if svm_predicted[0] == 'good':
             found_goods += 1
         if lgrg_predicted[0] == 'good':
