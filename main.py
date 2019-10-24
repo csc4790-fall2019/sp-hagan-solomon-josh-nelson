@@ -27,4 +27,13 @@ def main(runs):
 	print('Failure Posts %: {0}'.format(failure_pct))
 	print('Average Posts %: {0}'.format(avg_pct))
 
+	sp = round(success_pct * 100)
+	fp = round(failure_pct * 100)
+	ap = round(avg_pct * 100)
+
+	print(sp)
+	print(fp)
+	print(ap)
+	clfs.mat_plot_test_accuracy(sp, fp, ap)
+
 main(20)

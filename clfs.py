@@ -6,6 +6,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 
 def naive_bayes():
     nb = Pipeline([('vect', CountVectorizer(strip_accents='unicode', lowercase=True)),
@@ -133,3 +134,33 @@ def predict_title(data, title, runs):
         prediction = 'bad'
 
     return prediction
+
+def mat_plot_test_accuracy(part1, part2, part3):
+    #parameters must represent a number between 0 and 100 inclusive
+    fig1, ax1 = plt.subplots()
+    labels = 'correct viral training posts', 'missed viral training posts'
+    sizes = [part1, 100-part1]
+    explode = (0.1, 0)  # only "explode" the 2nd slice
+    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+            shadow=True, startangle=90)
+    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.savefig('success_percentage.png')
+
+    fig2, ax2 = plt.subplots()
+    labels = 'correct non-viral training posts', 'missed non-viral training posts'
+    sizes = [part2, 100 - part2]
+    explode = (0.1, 0)  # only "explode" the 2nd slice
+    ax2.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+            shadow=True, startangle=90)
+    ax2.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.savefig('failure_percentage.png')
+
+    fig3, ax3 = plt.subplots()
+    labels = 'average correct', 'average missed'
+    sizes = [part3, 100 - part3]
+    explode = (0.1, 0)  # only "explode" the 2nd slice
+    ax3.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+            shadow=True, startangle=90)
+    ax3.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.savefig('average_percentage.png')
+
