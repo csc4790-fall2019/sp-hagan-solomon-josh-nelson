@@ -2,6 +2,7 @@ import praw
 import json
 import utils
 import clfs
+import zipf
 from scraper import scrape
 from sklearn.model_selection import train_test_split
 
