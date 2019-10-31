@@ -161,7 +161,7 @@ def mat_plot_test_accuracy(part1, part2, part3):
     plt.savefig('failure_percentage.png')
 
     fig3, ax3 = plt.subplots()
-    labels = 'Correct', 'Missed'
+    labels = 'Correct', 'Incorrect'
     sizes = [part3, 100 - part3]
     explode = (0.1, 0)  # only "explode" the 2nd slice
     ax3.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
