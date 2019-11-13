@@ -15,8 +15,11 @@ def scrape(after, before, subreddit, size):
     api_url = 'http://api.pushshift.io/reddit/search/submission/?subreddit=' + subreddit + '&after=' + after \
               + '&before=' + before + '&size=' + size
 
-    print("yeet")
+    request = requests.get(api_url)
+    data = json.loads(request.text)
+
+    print(data)
 
 
 
-scrape(100, 90, 'askreddit', 100)
+scrape('100d', '90d' , 'askreddit', '100')
