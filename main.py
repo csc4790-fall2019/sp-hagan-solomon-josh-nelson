@@ -17,6 +17,7 @@ def main(title_runs, total_percent_runs):
                          user_agent='This is a test.')
 
     #scrape('AskReddit', reddit)
+
     data = utils.get_data('AskReddit')
 
     test_title = input('Enter a title: ')
