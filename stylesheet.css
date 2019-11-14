@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+      body, html
+      {
+        height: 100%;
+        margin: 0%;
+      }
+
+      .header 
+      {
+        background-color: #ddd;
+        text-align: center;
+        margin: 0;
+        padding: 5px;
+      }
+
+      .topnav
+      {
+        margin: auto;
+        overflow: hidden;
+        background-color: #ddd;
+        display: block;
+        text-align: center;
+        border-radius: 25px;
+        border: 2px solid red;
+        padding: 10px;
+      }
+
+      .topnav a
+      {
+        display: inline-block;
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      .topnav a:hover
+      {
+        background-color: white;
+        color: black;
+      }
+
+      .body
+      {
+        background-image: url(https://images.pexels.com/photos/218434/pexels-photo-218434.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 10px;
+
+        color:white;
+        text-align: center;
+        height: 100%;
+      }
+      .textbox
+      {
+        opacity: 0.6;
+        bottom: 20px;
+        right: 20px;
+        background-color: #ffffff;
+        color: black;
+        padding-left: 20px;
+        padding-right: 20px;
+        border: 2px;
+        border-radius: 25px;
+        width: 800px;
+        margin: auto;
+      }
+
+    </style>
