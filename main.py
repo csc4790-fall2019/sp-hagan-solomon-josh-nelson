@@ -2,7 +2,7 @@ import praw
 import json
 import utils
 import clfs
-import zipf
+from zipf import populate_freq_dist_stop_list
 from scraper import scrape
 from sklearn.model_selection import train_test_split
 
@@ -17,6 +17,7 @@ def main(title_runs, total_percent_runs):
                          user_agent='This is a test.')
 
     #scrape('AskReddit', reddit)
+    #populate_freq_dist_stop_list('this is a title', 'AskReddit')
 
     data = utils.get_data('AskReddit')
 

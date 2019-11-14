@@ -41,11 +41,23 @@ def populate_freq_dist_stop_list(subreddit_name):
         json.dump(size, file)
 
 
-    '''
-    plt.ion()
-    fd.plot(25, title='Top 25 Most Common Words in Corpus: No Stop words')
-    plt.tight_layout()
-    plt.savefig('top_25_words_used_stop_words.png')
-    plt.ioff()
-    '''
-populate_freq_dist_stop_list('AskReddit')
+
+def determine_top_words(title, subreddit):
+
+    subreddit_dist_size = Path('subreddits_freq_dist/{}'.format(subreddit))
+
+    with open(subreddit_dist_size) as f:
+        data = json.load(f)
+
+    holder = re.sub(r'\b[A-Z]+\b', '', title)
+    holder = str.split()
+
+    top_10_percent = {}
+    top_25_percent = {}
+
+    for token in holder:
+
+
+
+
+#populate_freq_dist_stop_list('AskReddit')
