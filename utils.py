@@ -8,23 +8,38 @@ STOPWORDS = ['the', 'it', 'a', 'an', 'was', 'were', 'had', 'is', 'have', 'are']
 
 def get_data(subreddit_name):
     p = Path('subreddits/{0}'.format(subreddit_name))
-    directories = [x for x in p.iterdir() if x.is_dir()]
+    files = [x for x in p.iterdir() if x.is_file()]
 
     text_data = []
     labels = []
     weights = []
 
     counter = 0
-    for directory in directories:
-        for file in directory.iterdir():
-            with open(file) as f:
-                data = json.load(f)
-                text_data.append(data['title'])
-                
-                if data['score'] >= 500:
-                    labels.append('good')
-                else:
-                    labels.append('bad')
+
+    good = 0
+    medium_high = 0
+    medium_low = 0
+    bad = 0
+    for file in files:
+        with open(file) as f:
+            data = json.load(f)
+            text_data.append(data['title'])
+            if data['score'] >= 2000:
+                good += 1
+                labels.append('1')
+            # elif data['score'] >= 1000 and data['score'] < 5000:
+            #     medium_high += 1
+            #     labels.append('2')
+            # elif data['score'] >= 100 and data['score'] < 1000:
+            #     medium_low += 1
+            #     labels.append('1')
+            else:
+                bad += 1
+                labels.append('0')
+    print(good)
+    print(medium_high)
+    print(medium_low)
+    print(bad)
 
 
     Reddit_Data = {'Title': text_data,'Rating': labels}

@@ -4,6 +4,7 @@ import utils
 import clfs
 from zipf import populate_freq_dist_stop_list
 from scraper import scrape
+from clfs import test
 from sklearn.model_selection import train_test_split
 
 def main(title_runs, total_percent_runs):
@@ -18,8 +19,8 @@ def main(title_runs, total_percent_runs):
 
     #scrape('AskReddit', reddit)
     #populate_freq_dist_stop_list('this is a title', 'AskReddit')
-
     data = utils.get_data('AskReddit')
+    data = utils.get_data('askreddit')
 
     test_title = input('Enter a title: ')
     prediction = clfs.predict_title(data, test_title, title_runs)
@@ -37,5 +38,7 @@ def main(title_runs, total_percent_runs):
     
     clfs.mat_plot_test_accuracy(sp, fp, ap)
 
-main(20, 20)
+    return prediction[0]
+
+main(3, 1)
 
