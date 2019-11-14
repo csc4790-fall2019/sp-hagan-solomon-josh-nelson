@@ -45,10 +45,10 @@ def populate_freq_dist_stop_list(subreddit_name):
     for key, value in sorted_freq_dist.items():
         counter += 1
         if key in sorted_freq_dist.keys():
-            if counter <= num_top_10:
+            if counter <= 10:
                 top_10_percent.append(key)
         if key in sorted_freq_dist.keys():
-            if counter <= num_top_25:
+            if counter <= 20:
                 top_25_percent.append(key)
 
 #end sketchy stuff
@@ -62,6 +62,25 @@ def populate_freq_dist_stop_list(subreddit_name):
         json.dump(size, file)
 
 
+
+def stringify(subreddit):
+
+    subreddit_dist_size = Path('subreddits_freq_dist/{}_freq_dist_size.json'.format(subreddit))
+
+    with open(subreddit_dist_size) as f:
+        size_data = (json.load(f))
+
+    top_10_list = []
+    top_25_list = []
+
+    top_10_list = size_data['top_10']
+    str_top_10 = '\n'.join(top_10_list)
+
+    top_25_list = size_data['top_25']
+    str_top_25 = '\n'.join(top_25_list)
+
+    print(str_top_10)
+    print(str_top_25)
 
 def determine_top_words(title, subreddit):
 
@@ -97,6 +116,6 @@ def determine_top_words(title, subreddit):
     print(top_10_percent)
     print(top_25_percent)
 
-populate_freq_dist_stop_list('AskReddit')
-
+#populate_freq_dist_stop_list('AskReddit')
+stringify('AskReddit')
 #determine_top_words('What it be people made random fluff noise', 'AskReddit')
