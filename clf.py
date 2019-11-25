@@ -76,7 +76,7 @@ def create_models(subreddit):
 def predict(title, subreddit):
     models_path = Path('models/{0}'.format(subreddit.lower()))
     if not models_path.exists():
-        create_modules(subreddit)
+        create_models(subreddit)
 
     with open(models_path / 'nb.pkl', 'rb') as file:
         nb = pickle.load(file)
@@ -93,7 +93,7 @@ def predict(title, subreddit):
     if y_score_2[0] == '1':
         found_1 += 1
 
-    if found_1 >= 1 and test_y[i] == '1':
-        results = 1
+    if found_1 >= 1:
+        result = 1
 
     return result

@@ -40,12 +40,12 @@ def scrape(after, before, subreddit, size, order):
         with open(path / '{0}.json'.format(post_data['id']), 'w', encoding='utf-8') as file:
             json.dump(post_data, file)
 
-def run_scraper():
+def run_scraper(subreddit):
     before = 0
     after = 20
     for x in range(50):
-        scrape('{0}d'.format(after), '{0}d'.format(before), 'askreddit', '500', 'desc')
-        scrape('{0}d'.format(after), '{0}d'.format(before), 'askreddit', '500', 'asc')
+        scrape('{0}d'.format(after), '{0}d'.format(before), subreddit, '500', 'desc')
+        scrape('{0}d'.format(after), '{0}d'.format(before), subreddit, '500', 'asc')
         before += 20
         after += 20
         time.sleep(1)
