@@ -23,15 +23,13 @@ def main(input_title, subreddit):
 
     # populate_freq_dist_stop_list('this is a title', 'AskReddit')
 
-    prediction = clf.predict(input_title, subreddit)
-    print('Prediction for "{0}": {1}'.format(input_title, prediction))
+    #prediction = clf.predict(input_title, subreddit)
+    #print('Prediction for "{0}": {1}'.format(input_title, prediction))
 
 
-    prediction_guess = clf.predict(input_title, subreddit)
+    prediction_guess = clf.predict_guess(input_title, subreddit)
     print('Prediction_Guess for "{0}": {1}'.format(input_title, prediction_guess))
-    return prediction
 
 
 
-main('Doctors of Reddit what is the weirdest thing you saw?', 'pics')
-main('', 'PrequelMemes')
+main('Doctors of Reddit what is the weirdest thing you saw?', 'CasualConversation')

@@ -178,8 +178,8 @@ def predict_guess(title, subreddit):
     with open(models_path / 'lg_guess.pkl', 'rb') as file:
         lg = pickle.load(file)
 
-    y_score_1 = nb.predict_guess([title])
-    y_score_2 = lg.predict_guess([title])
+    y_score_1 = nb.predict([title])
+    y_score_2 = lg.predict([title])
 
     result = 0
     found_1 = 0
@@ -194,17 +194,17 @@ def predict_guess(title, subreddit):
     return result
 
 
-def guess_divide(subreddit):
+def guess_divide(subreddit_name):
     split_line = 300
     before = 0
     after = 20
 
-    run_scraper(subreddit)
-    df = karma_guess_filter(subreddit)
-    mode = df['score'].mode()
-    print(mode)
+    df = karma_guess_filter(subreddit_name)
+    median = df['score'].mean()
 
-    return mode
+    print(median)
+
+    return median
 
 
 def karma_guess_filter(subreddit_name):
@@ -216,6 +216,7 @@ def karma_guess_filter(subreddit_name):
     for file in files:
         with open(file) as f:
             data = json.load(f)
-            karma.append(data['score'])
+            if 1000 >= data['score'] > 0:
+                karma.append(data['score'])
     df = pd.DataFrame({'score': karma})
     return df

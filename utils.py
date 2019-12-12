@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
+from clf import guess_divide
 
 STOPWORDS = ['the', 'it', 'a', 'an', 'was', 'were', 'had', 'is', 'have', 'are']
 
@@ -42,8 +43,8 @@ def get_data_guess(subreddit_name):
     p = Path('subreddits/{0}'.format(subreddit_name))
     files = [x for x in p.iterdir() if x.is_file()]
 
-    mode = get_data_guess(subreddit_name)
-
+    median = guess_divide(subreddit_name)
+    print(median)
     text_data = []
     labels = []
 
@@ -53,7 +54,7 @@ def get_data_guess(subreddit_name):
         with open(file) as f:
             data = json.load(f)
             text_data.append(data['title'])
-            if data['score'] >= get_data_guess():
+            if data['score'] >= median:
                 rating_1 += 1
                 labels.append('1')
             else:
