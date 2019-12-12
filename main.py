@@ -7,6 +7,7 @@ from pathlib import Path
 from scraper import run_scraper
 from sklearn.model_selection import train_test_split
 
+
 def main(input_title, subreddit):
     with open('auth.json', 'r') as file:
         auth = json.load(file)
@@ -25,4 +26,12 @@ def main(input_title, subreddit):
     prediction = clf.predict(input_title, subreddit)
     print('Prediction for "{0}": {1}'.format(input_title, prediction))
 
+
+    prediction_guess = clf.predict(input_title, subreddit)
+    print('Prediction_Guess for "{0}": {1}'.format(input_title, prediction_guess))
     return prediction
+
+
+
+main('Doctors of Reddit what is the weirdest thing you saw?', 'pics')
+main('', 'PrequelMemes')
